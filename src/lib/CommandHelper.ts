@@ -27,7 +27,7 @@ export class CommandHelper {
         this.pattern = `${trigger.trim()} ${pattern.trim()}`;
         this.patternSplit = this.pattern.split(' ');
 
-        this.command = command.trim();
+        this.command = command.trim().replace(/  /, ' ');
         this.commandSplit = this.commandString(this.command);
 
         if ( _isFunction(callback)  ) {
@@ -97,7 +97,9 @@ export class CommandHelper {
         var parameters = {};
         var patternSplit = _clone(this.patternSplit);
         var commandSplit = _clone(this.commandSplit);
-        var patternRegex = /<([a-z_]+)>|<([a-zA-Z_]+)=([a-zA-Z \d]+)>|<([a-zA-Z_]+)="([a-zA-Z \d]+)">/; // TODO: Fix fucked up regex xD
+        var patternRegexName = 'a-z_';
+        var patternRegexVariable = 'a-zA-Z \\d_-';
+        var patternRegex = new RegExp('<(['+patternRegexName+']+)>|<(['+patternRegexName+']+)=(['+patternRegexVariable+']+)>|<(['+patternRegexName+']+)="(['+patternRegexVariable+']+)">'); // TODO: Fix fucked up regex xD
 
         // Checks if the trigger are the same;
         if ( patternSplit.shift() !== commandSplit.shift() ) {

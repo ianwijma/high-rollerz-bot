@@ -2,9 +2,13 @@ import { Message } from "discord.js";
 import { PingPongCommand } from "./commands/PingPongCommand";
 import {HelpCommand} from "./commands/HelpCommand";
 import {ManageCommand} from "./commands/ManageCommand";
-import {KickCommand} from "./commands/KickCommand";
+// import {KickCommand} from "./commands/KickCommand";
 import {InviteCommand} from "./commands/InviteCommand";
 import {SourceCommand} from "./commands/SourceCommand";
+import {NicknameCommand} from "./commands/NicknameCommand";
+import {AvatarCommand} from "./commands/AvatarCommand";
+import {GifCommand} from "./commands/GifCommand";
+import {PurgeCommand} from "./commands/PurgeCommand";
 
 export class MessageHandler {
 
@@ -22,9 +26,13 @@ export class MessageHandler {
         this.commandArray.push( PingPongCommand );
         this.commandArray.push( HelpCommand );
         this.commandArray.push( ManageCommand );
-        this.commandArray.push( KickCommand );
+        // this.commandArray.push( KickCommand );
         this.commandArray.push( InviteCommand );
         this.commandArray.push( SourceCommand );
+        this.commandArray.push( NicknameCommand );
+        this.commandArray.push( AvatarCommand );
+        this.commandArray.push( GifCommand );
+        this.commandArray.push( PurgeCommand );
     }
 
     public getCommandsArray () : Array<object>

@@ -1,14 +1,30 @@
 import { Client } from 'discord.js';
 import { MessageHandler } from './MessageHandler';
 import { EmojiHelper } from './lib/EmojiHelper';
+import Knex from 'knex';
 
 export class App {
 
     constructor () {
         global.discord = new Client();
+        global.memDb = Knex({
+            client: 'sqlite3',
+            connection: {
+                filename: ':memory:'
+            },
+            useNullAsDefault: true
+        });
+        global.db = Knex({
+            client: 'sqlite3',
+            connection: {
+                filename: 'database/database.sqlite'
+            },
+            useNullAsDefault: true
+        });
     }
 
     public start () {
+        this.startDatabase()
         this.startDiscord()
     }
 
@@ -26,6 +42,10 @@ export class App {
 
         // @ts-ignore
         global.emoji = new EmojiHelper()
+    }
+
+    private startDatabase () {
+
     }
 
 }

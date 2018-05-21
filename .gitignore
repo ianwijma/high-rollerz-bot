@@ -60,5 +60,8 @@ typings/
 # next.js build output
 .next
 
+database/*
+!database/.no-file-dir
+
 # personal shit
 .idea

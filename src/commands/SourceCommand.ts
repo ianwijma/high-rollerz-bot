@@ -8,6 +8,6 @@ export class SourceCommand extends AbstractCommand {
 
     processCommand () : void
     {
-        this.message.channel.send(`The beautiful sause code you can find @ https://github.com/ianwijma/high-rollerz-bot`)
+        this.message.author.send(`The beautiful sause code you can find @ https://github.com/ianwijma/high-rollerz-bot`)
     }
 }

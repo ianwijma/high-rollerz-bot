@@ -14,7 +14,7 @@ export class InviteCommand extends AbstractCommand {
             .then(guildChannel => {
                 guildChannel.createInvite({maxUses:max_usages,maxAge:86400,unique:true})
                     .then(invite => {
-                        this.message.channel.send(`One time invite that's valid for one day: ${invite.url}`)
+                        this.message.author.send(`One time invite that's valid for one day: ${invite.url}`)
                     })
             });
     }
