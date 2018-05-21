@@ -20,17 +20,14 @@ export class AvatarCommand extends AbstractCommand {
 
         this.message.channel.send(url, {
             embed: {
-                title: user.tag,
-                author: {
-                    name: guildMember.displayName
-                },
+                title: guildMember.displayName,
                 image: {
                     url: user.avatarURL,
                     height: 512,
                     width: 512,
                 },
                 footer: {
-                    text: "SWAG!"
+                    text: user.tag
                 }
             }
         });
