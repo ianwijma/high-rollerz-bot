@@ -27,7 +27,7 @@ export abstract class AbstractCommand {
         try {
             ezCommand.call()
         } catch ( e ) {
-            this.message.channel.send(`${global.emoji.parse('no')} ${e.toString()}`, {code:true});
+            this.message.channel.send(`X ${e.toString()}`, {code:true});
         }
     }
 

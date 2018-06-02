@@ -48,7 +48,7 @@ export class ManageCommand extends AbstractCommand {
     {
         this.message.channel.send(`Updating bots user name to ${action_value}..`)
             .then(msg=>{
-                global.discord.user.setUsername(action_value)
+                global.discord.object.user.setUsername(action_value)
                     .then(()=>{
                         // @ts-ignore
                         msg.edit(`Updated bots user name to ${action_value}`)
@@ -60,7 +60,7 @@ export class ManageCommand extends AbstractCommand {
     {
         this.message.channel.send(`Updating bots game to ${action_value}..`)
             .then(msg=>{
-                global.discord.user.setActivity(action_value)
+                global.discord.object.user.setActivity(action_value)
                     .then(()=>{
                         // @ts-ignore
                         msg.edit(`Updated bots game to ${action_value}`)

@@ -1,51 +1,39 @@
-import { Client } from 'discord.js';
-import { MessageHandler } from './MessageHandler';
-import { EmojiHelper } from './lib/EmojiHelper';
-import Knex from 'knex';
+import {DiscordCore} from "./cores/DiscordCore";
+import {GuildCore} from "./cores/GuildCore";
+import {DatabaseCore} from "./cores/DatabaseCore";
+import {MemoryDatabaseCore} from "./cores/MemoryDatabaseCore";
+import {CommandCore} from "./cores/CommandCore";
 
 export class App {
 
+    db: DatabaseCore;
+    memdb: MemoryDatabaseCore;
+    discord: DiscordCore;
+    guild: GuildCore;
+    command: CommandCore;
+
     constructor () {
-        global.discord = new Client();
-        global.memDb = Knex({
-            client: 'sqlite3',
-            connection: {
-                filename: ':memory:'
-            },
-            useNullAsDefault: true
-        });
-        global.db = Knex({
-            client: 'sqlite3',
-            connection: {
-                filename: 'database/database.sqlite'
-            },
-            useNullAsDefault: true
-        });
+        this.db = new DatabaseCore();
+        this.memdb = new MemoryDatabaseCore();
+        this.discord = new DiscordCore();
+        this.guild = new GuildCore();
+        this.command = new CommandCore();
     }
 
-    public start () {
-        this.startDatabase()
-        this.startDiscord()
-    }
+    /**
+     * Order matters here
+     * @returns {Promise<void>}
+     */
+    public async start () {
+        console.log(`${await this.db.start()} started`);
 
-    private startDiscord () {
-        global.discord.on('ready', () => {
-            console.log(`Successfully logged in as ${global.discord.user.tag}`);
-        });
+        console.log(`${await this.memdb.start()} started`);
 
-        global.discord.on('message', message => {
-            let messageHandler = new MessageHandler(message);
-            messageHandler.handle();
-        });
+        console.log(`${await this.discord.start()} started`);
 
-        global.discord.login(process.env.DISCORD_BOT_TOKEN)
+        console.log(`${await this.guild.start()} started`);
 
-        // @ts-ignore
-        global.emoji = new EmojiHelper()
-    }
-
-    private startDatabase () {
-
+        console.log(`${await this.command.start()} started`);
     }
 
 }
