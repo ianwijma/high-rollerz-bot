@@ -1,5 +1,5 @@
 import {AbstractCore} from "../abstracts/AbstractCore";
-import {Client} from "discord.js";
+import {Channel, Client, Collection, VoiceChannel} from "discord.js";
 
 export class DiscordCore extends AbstractCore{
 
@@ -25,6 +25,27 @@ export class DiscordCore extends AbstractCore{
 
             this.object.login(process.env.DISCORD_BOT_TOKEN);
         })
+    }
+
+    getChannels (channels : string|string[] ) : Collection<string,Channel> {
+        if ( typeof channels === 'string' ){
+            channels = [channels];
+        };
+
+        return this.object.channels.filter(channel => {
+            return channels.indexOf(channel.id) !== -1;
+        });
+    }
+
+    getVoiceChannels (channels : string|string[] ) : Collection<string,VoiceChannel> {
+        if ( typeof channels === 'string' ){
+            channels = [channels];
+        };
+
+        // @ts-ignore: Are always voice channels
+        return this.object.channels.filter(channel => {
+            return channels.indexOf(channel.id) !== -1 && channel.type === 'voice';
+        });
     }
 
 }

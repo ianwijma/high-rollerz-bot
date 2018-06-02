@@ -1,5 +1,4 @@
 import { AbstractCommand } from "../abstracts/AbstractCommand";
-import {Guild, GuildChannel} from "discord.js";
 
 export class InviteCommand extends AbstractCommand {
 
@@ -7,33 +6,21 @@ export class InviteCommand extends AbstractCommand {
 
     readonly description: string = 'Create an invite for one person';
 
+    readonly example: string = `${process.env.COMMAND_STARTER} invite // Creates you a one time use invite
+${process.env.COMMAND_STARTER} invite 10 // Creates you a invite that can be used 10 times`;
+
     processCommand ( parameters ) : void
     {
         var max_usages = parameters.max_usages;
-        this.getDefaultChannel()
+        if (max_usages <= 0) {
+            max_usages = 1
+        }
+        global.guild.getDefaultChannel( this.message.guild )
             .then(guildChannel => {
                 guildChannel.createInvite({maxUses:max_usages,maxAge:86400,unique:true})
                     .then(invite => {
                         this.message.author.send(`One time invite that's valid for one day: ${invite.url}`)
                     })
             });
-    }
-
-    async getDefaultChannel () : Promise<GuildChannel>
-    {
-        var guild : Guild = this.message.guild;
-        // get "original" default channel
-        if(guild.channels.has(guild.id))
-            return guild.channels.get(guild.id)
-
-        // Check for a "general" channel, which is often default chat
-        if(guild.channels.exists("name", "general"))
-            return guild.channels.find("name", "general");
-        // Now we get into the heavy stuff: first channel in order where the bot can speak
-        // hold on to your hats!
-        return guild.channels
-            .filter(c => c.type === "text" &&
-                c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
-            .first();
     }
 }

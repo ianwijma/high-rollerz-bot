@@ -9,7 +9,7 @@ export class EmojiHelper {
             string = string.slice(0, -1)
         }
 
-        return global.discord.emojis.find('name', string)
+        return global.discord.object.emojis.find('name', string).toString()
     }
 
 }

@@ -8,6 +8,9 @@ export class ManageCommand extends AbstractCommand {
 
     readonly show_in_help : boolean = false;
 
+    readonly example: string = `${process.env.COMMAND_STARTER} manage name // changes the name of  the bot`;
+
+
     processCommand ( parameters ) : void
     {
         var trusted_ids = process.env.TRUSTED_IDS;

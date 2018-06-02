@@ -9,6 +9,7 @@ import {PingPongCommand} from "../commands/PingPongCommand";
 import {AvatarCommand} from "../commands/AvatarCommand";
 import { Message } from "discord.js";
 import {AutoChannelCommand} from "../commands/AutoChannelCommand";
+import {EmojiCommand} from "../commands/EmojiCommand";
 
 export class CommandCore extends AbstractCore{
 
@@ -36,6 +37,7 @@ export class CommandCore extends AbstractCore{
         this.command_array.push( AvatarCommand );
         this.command_array.push( GifCommand );
         this.command_array.push( AutoChannelCommand );
+        this.command_array.push( EmojiCommand );
     }
 
     private startListeners() {
@@ -43,7 +45,7 @@ export class CommandCore extends AbstractCore{
          * @var Message message
          */
         this.object.eventbus.on('message', message => {
-            if (message.toString().startsWith(process.env.COMMAND_STARTER)) {
+            if (message.toString().startsWith(process.env.COMMAND_STARTER) && !message.author.bot) {
                 this.handle(message)
             }
         });

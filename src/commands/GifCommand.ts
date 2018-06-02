@@ -10,6 +10,10 @@ export class GifCommand extends AbstractCommand {
 
     readonly description: string = 'Searches giphy for amazing gifs!';
 
+    readonly example: string = `${process.env.COMMAND_STARTER} gif potato // Gets you all the potato gifs
+${process.env.COMMAND_STARTER} gif potato R @ianwijma // Gets you are the kinky (R rated) potato gifs ;D`;
+
+
     processCommand ( parameters ) : void
     {
         var giphy = Giphy(process.env.GIPHY_API_KEY);

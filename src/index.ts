@@ -4,6 +4,8 @@ import {DatabaseCore} from "./cores/DatabaseCore";
 import {MemoryDatabaseCore} from "./cores/MemoryDatabaseCore";
 import {CommandCore} from "./cores/CommandCore";
 import {AutoChannelCore} from "./cores/AutoChannelCore";
+import {MessageCore} from "./cores/MessageCore";
+import {EmojiCore} from "./cores/EmojiCore";
 export class App {
 
     db: DatabaseCore;
@@ -12,6 +14,8 @@ export class App {
     guild: GuildCore;
     command: CommandCore;
     autochannel: AutoChannelCore;
+    message: MessageCore;
+    emoji: EmojiCore;
 
     constructor () {
         this.db = new DatabaseCore();
@@ -20,6 +24,8 @@ export class App {
         this.guild = new GuildCore();
         this.autochannel = new AutoChannelCore();
         this.command = new CommandCore();
+        this.message = new MessageCore();
+        this.emoji = new EmojiCore();
     }
 
     /**
@@ -33,11 +39,15 @@ export class App {
 
         console.log(`${await this.discord.start()} started`);
 
+        console.log(`${await this.emoji.start()} started`);
+
         console.log(`${await this.guild.start()} started`);
 
         console.log(`${await this.autochannel.start()} started`);
 
         console.log(`${await this.command.start()} started`);
+
+        console.log(`${await this.message.start()} started`);
     }
 
 }

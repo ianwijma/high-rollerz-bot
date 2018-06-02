@@ -23,7 +23,7 @@ export class MemoryDatabaseCore extends AbstractCore{
 
     async createTables() : Promise<any> {
         return new Promise(resolve => {
-            // TODO: Create tables needed for guilds
+            // TODO: Create tables needed for guild
 
             resolve();
         })

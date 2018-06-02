@@ -41,6 +41,7 @@ export class DatabaseCore extends AbstractCore{
                         this.getTable(table_name)
                             .then(value => resolve(value));
                     } else {
+                        console.log(`Trying to create table with name ${table_name}`);
                         this.object.schema.createTableIfNotExists(table_name, table_callback)
                             .then(value => resolve(value));
                     }
@@ -54,7 +55,7 @@ export class DatabaseCore extends AbstractCore{
 
     async createTables() : Promise<any> {
         return new Promise(resolve => {
-            // TODO: Create tables needed for guilds
+            // TODO: Create tables needed for guild
 
             resolve();
         })

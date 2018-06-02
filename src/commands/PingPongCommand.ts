@@ -6,6 +6,8 @@ export class PingPongCommand extends AbstractCommand {
 
     readonly description: string = 'Replies with Pong!';
 
+    readonly example: string = `${process.env.COMMAND_STARTER} ping // pong!`;
+
     processCommand ( parameters ) : void
     {
         var amount = parseInt(parameters.amount);

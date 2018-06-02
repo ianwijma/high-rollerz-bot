@@ -1,5 +1,4 @@
 import { AbstractCommand } from "../abstracts/AbstractCommand";
-import {MessageHandler} from "../MessageHandler";
 import {
     each as _each
 } from 'lodash'
@@ -10,10 +9,13 @@ export class HelpCommand extends AbstractCommand {
 
     readonly description: string = 'Help request';
 
+    readonly example: string = `${process.env.COMMAND_STARTER} help // Sends you a PM with this message
+${process.env.COMMAND_STARTER} help gif // Sends you a PM with all the info about one command`;
+
+
     processCommand ( parameters ) : void
     {
-        var messageHelper = new MessageHandler();
-        var commands = messageHelper.getCommandsObject()
+        var commands = global.command.getCommandsObject()
         var commandName = parameters.command;
         var message = `**HELP**`;
 
@@ -21,24 +23,32 @@ export class HelpCommand extends AbstractCommand {
             if ( commandName in commands && commands[commandName].show_in_help ) {
                 var commandInfo = commands[commandName];
                 message = `**${commandInfo.name.toUpperCase()}**
-                
-Parameters:     ${commandInfo.parameters}
-Descrption:     ${commandInfo.description}`
+\`\`\`Example:        
+${commandInfo.example}
+Description:     
+${commandInfo.description}
+Parameters:     
+${commandInfo.parameters}
+\`\`\``
             } else {
                 message = `can not find command '${commandName}'`;
             }
         } else {
-            message = "**HELP**\n\n";
+            message = "__**HELP**__\n\n";
             _each(commands, commandInfo => {
                 if ( commandInfo.show_in_help ) {
-                    message += `**${commandInfo.name.toUpperCase()}**
-                    
-Parameters:     ${commandInfo.parameters}
-Descrption:     ${commandInfo.description}`;
+                    message += `__${commandInfo.name.toUpperCase()}__
+\`\`\`Example:        
+${commandInfo.example}
+Description:     
+${commandInfo.description}
+Parameters:     
+${commandInfo.parameters}
+\`\`\``;
                 }
             })
         }
 
-        this.message.author.send(message,{code:true,split:true})
+        this.message.author.send(message,{split:true})
     }
 }

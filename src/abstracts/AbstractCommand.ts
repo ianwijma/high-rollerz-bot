@@ -9,6 +9,8 @@ export abstract class AbstractCommand {
 
     abstract readonly description : string;
 
+    abstract readonly example : string;
+
     readonly show_in_help : boolean = true;
 
     constructor (message:Message)
@@ -27,7 +29,7 @@ export abstract class AbstractCommand {
         try {
             ezCommand.call()
         } catch ( e ) {
-            this.message.channel.send(`X ${e.toString()}`, {code:true});
+            this.message.channel.send(`${global.emoji.getEmoji('no')} ${e.toString()}`);
         }
     }
 

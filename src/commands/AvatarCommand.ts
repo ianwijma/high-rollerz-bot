@@ -6,6 +6,9 @@ export class AvatarCommand extends AbstractCommand {
 
     readonly description: string = 'Returns the avatar of an user';
 
+    readonly example: string = `${process.env.COMMAND_STARTER} avatar // Gets your avatar
+${process.env.COMMAND_STARTER} avatar @ianwijma // Gets the mentioned users avatar`;
+
     processCommand () : void
     {
         var guild = this.message.guild;
