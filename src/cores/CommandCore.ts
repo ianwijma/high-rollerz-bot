@@ -8,6 +8,7 @@ import {SourceCommand} from "../commands/SourceCommand";
 import {PingPongCommand} from "../commands/PingPongCommand";
 import {AvatarCommand} from "../commands/AvatarCommand";
 import { Message } from "discord.js";
+import {AutoChannelCommand} from "../commands/AutoChannelCommand";
 
 export class CommandCore extends AbstractCore{
 
@@ -34,6 +35,7 @@ export class CommandCore extends AbstractCore{
         this.command_array.push( SourceCommand );
         this.command_array.push( AvatarCommand );
         this.command_array.push( GifCommand );
+        this.command_array.push( AutoChannelCommand );
     }
 
     private startListeners() {

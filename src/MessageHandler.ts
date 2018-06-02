@@ -52,6 +52,7 @@ export class MessageHandler {
             var command = new commandCls();
             commands[command.getTrigger()] = {
                 name: command.getTrigger(),
+                parameters: command.getParameters(),
                 description: command.getDescription(),
                 show_in_help: command.show_in_help,
                 class: command,

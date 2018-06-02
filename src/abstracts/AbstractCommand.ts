@@ -35,6 +35,12 @@ export abstract class AbstractCommand {
         return this.command.split(' ').shift()
     }
 
+    public getParameters () {
+        var collection = this.command.split(' ');
+        collection.shift();
+        return collection.join(' ')
+    }
+
     public getDescription () {
         return this.description
     }

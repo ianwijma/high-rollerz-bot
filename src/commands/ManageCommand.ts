@@ -12,12 +12,7 @@ export class ManageCommand extends AbstractCommand {
     {
         var trusted_ids = process.env.TRUSTED_IDS;
         var current_id = this.message.author.id;
-        var can_execute = false;
-        trusted_ids.split(',').forEach(id => {
-            if ( current_id === id ) {
-                can_execute = true;
-            }
-        });
+        var can_execute = trusted_ids.split(',').indexOf(current_id) !== -1;
 
         if (!can_execute) {
             throw new Error('Lol no, nice try.');

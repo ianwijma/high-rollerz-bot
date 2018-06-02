@@ -1,6 +1,5 @@
 import {AbstractCore} from "../abstracts/AbstractCore";
 import {Client} from "discord.js";
-import EventEmitter = NodeJS.EventEmitter;
 
 export class DiscordCore extends AbstractCore{
 
@@ -10,7 +9,7 @@ export class DiscordCore extends AbstractCore{
 
     object: Client;
 
-    eventbus: EventEmitter;
+    eventbus: Client;
 
     async startCore(): Promise<any> {
         this.eventbus = this.object = new Client();

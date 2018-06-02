@@ -3,6 +3,7 @@ import {DiscordCore} from "../cores/DiscordCore";
 import {DatabaseCore} from "../cores/DatabaseCore";
 import {CommandCore} from "../cores/CommandCore";
 import {MemoryDatabaseCore} from "../cores/MemoryDatabaseCore";
+import {AutoChannelCore} from "../cores/AutoChannelCore";
 
 declare global {
     namespace NodeJS {
@@ -12,6 +13,7 @@ declare global {
             db : DatabaseCore,
             command : CommandCore,
             memdb : MemoryDatabaseCore,
+            autochannel : AutoChannelCore,
         }
     }
 }

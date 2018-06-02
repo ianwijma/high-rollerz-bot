@@ -1,5 +1,6 @@
 import {AbstractCore} from "../abstracts/AbstractCore";
 import {DatabaseCore} from "./DatabaseCore";
+import {QueryBuilder} from "knex";
 
 export class GuildCore extends AbstractCore{
 
@@ -9,6 +10,8 @@ export class GuildCore extends AbstractCore{
 
     object: DatabaseCore;
 
+    table: QueryBuilder;
+
     async startCore(): Promise<any> {
         this.object = global.db;
 
@@ -16,11 +19,7 @@ export class GuildCore extends AbstractCore{
     }
 
     async createTables() : Promise<any> {
-        return new Promise(resolve => {
-            // TODO: Create tables needed for guilds
 
-            resolve();
-        })
     }
 
 }
