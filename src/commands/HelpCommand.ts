@@ -23,11 +23,11 @@ ${process.env.COMMAND_STARTER} help gif // Sends you a PM with all the info abou
             if ( commandName in commands && commands[commandName].show_in_help ) {
                 var commandInfo = commands[commandName];
                 message = `**${commandInfo.name.toUpperCase()}**
-\`\`\`Example:        
+\`\`\`Example:
 ${commandInfo.example}
-Description:     
+Description:
 ${commandInfo.description}
-Parameters:     
+Parameters:
 ${commandInfo.parameters}
 \`\`\``
             } else {
@@ -36,13 +36,15 @@ ${commandInfo.parameters}
         } else {
             message = "__**HELP**__\n\n";
             _each(commands, commandInfo => {
+                // @ts-ignore
                 if ( commandInfo.show_in_help ) {
+                    // @ts-ignore
                     message += `__${commandInfo.name.toUpperCase()}__
-\`\`\`Example:        
+\`\`\`Example:
 ${commandInfo.example}
-Description:     
+Description:
 ${commandInfo.description}
-Parameters:     
+Parameters:
 ${commandInfo.parameters}
 \`\`\``;
                 }
