@@ -21,8 +21,9 @@ export class GifCommand extends AbstractCommand {
             rating: parameters.rating,
         }
         giphy.search(options, (_, response) => {
-            var result : any = _first(response.data);
-            this.message.channel.send({
+            if (response.length > 0) {
+                var result : any = _first(response.data);
+                this.message.channel.send({
                     embed: {
                         description: `Title: ${result.title}\nAuthor: **${result.username ? result.username : "No author"}**`,
                         image: {
@@ -32,6 +33,9 @@ export class GifCommand extends AbstractCommand {
                         }
                     }
                 })
+            } else {
+                this.message.channel.send(`Nothing found ( ͡° ͜ʖ ͡°)`);
+            }
         })
     }
 }
