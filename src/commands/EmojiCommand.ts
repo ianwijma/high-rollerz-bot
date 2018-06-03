@@ -26,6 +26,21 @@ export class EmojiCommand extends AbstractCommand {
                 .then(() => {
                     this.message.channel.send(`Emoji ":${emoji_name}:" removed`)
                 })
+        } else if ( message_id.trim() === 'this' ) {
+            var attachment = this.message.attachments.first();
+            if (attachment) {
+                var request = Request.defaults({encoding:null});
+                request.get(attachment.url, (_, __, body) => {
+                    guild.createEmoji(// TODO: Errors from createEmoji are not being reported. test @ clean env + report/fix @ discordJS
+                        body,
+                        emoji_name,
+                        [],
+                        'New Emoji'
+                    ).then(() => {
+                        this.message.channel.send(`Emoji added: ${global.emoji.getEmoji(emoji_name)}`);
+                    });
+                })
+            }
         } else {
             this.message.channel.fetchMessage(message_id)
                 .then(message => {
