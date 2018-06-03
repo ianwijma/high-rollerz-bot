@@ -2,7 +2,7 @@ import { AbstractCommand } from "../abstracts/AbstractCommand";
 
 export class ManageCommand extends AbstractCommand {
 
-    readonly command : string = 'manage <action> <action_value>';
+    readonly command : string = 'manage <action> <action_value="null">';
 
     readonly description: string = 'Actions that allow bot changing things';
 
@@ -38,8 +38,20 @@ export class ManageCommand extends AbstractCommand {
 
         actions['name'] = value => {this.changeName(value)};
         actions['game'] = value => {this.changeGame(value)};
+        actions['die'] = () => {this.die()};
 
         return actions
+    }
+
+    die ()
+    {
+        this.message.channel.send('Goodbye cruel world')
+            .then(() => {
+                this.message.channel.send('*Dies*');
+                setTimeout(()=> {
+                    process.abort()
+                }, 500)
+            });
     }
 
     changeName (action_value:string)
