@@ -7,4 +7,3 @@ export interface ModuleInterface {
     getModuleName():string;
     start():Promise<void>;
 }
-

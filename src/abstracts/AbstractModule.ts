@@ -1,6 +1,6 @@
 import {ModuleInterface} from "../interfaces/interfaces";
 
-export abstract class AbstractModule implements ModuleInterface{
+export abstract class AbstractModule implements ModuleInterface {
 
     abstract eventPrefix: string;
     abstract moduleName: string;
