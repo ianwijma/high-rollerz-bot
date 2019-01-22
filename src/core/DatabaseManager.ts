@@ -3,6 +3,7 @@ import {AbstractModule} from "../abstracts/AbstractModule";
 import {CreateTableBuilder} from "knex";
 import Bookshelf = require("bookshelf");
 
+
 let db:Knex;
 let mem:Knex;
 
