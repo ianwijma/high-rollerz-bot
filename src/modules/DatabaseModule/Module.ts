@@ -12,10 +12,11 @@ export class Module extends AbstractModule{
             global.db = Knex({
                 client: 'sqlite3',
                 connection: {
-                    filename: 'database/database.sqlite'
+                    filename: '../database/database.sqlite'
                 },
                 useNullAsDefault: true
             });
+
 
             // TODO: Create sql database
             // TODO: Create memory database

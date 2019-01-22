@@ -1,4 +1,4 @@
-import {ModuleInterface} from "../interfaces";
+import {ModuleInterface} from "../interfaces/interfaces";
 
 export abstract class AbstractModule implements ModuleInterface{
 
