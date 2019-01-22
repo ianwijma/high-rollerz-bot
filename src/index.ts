@@ -11,18 +11,13 @@ export default class App {
 
     async startModules () : Promise<any> {
         return new Promise(resolve => {
+
             resolve()
         })
     }
 
-    async start () : Promise<any> {
-        let res;
-        let prom = new Promise(resolve => {res = resolve});
-
+    async start (){
         await this.startModules();
-
-        res();
-        return prom;
     }
 
 
